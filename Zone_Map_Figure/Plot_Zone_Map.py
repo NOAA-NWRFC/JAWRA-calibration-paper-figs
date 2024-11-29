@@ -23,7 +23,6 @@ from matplotlib.font_manager import FontProperties
 from matplotlib import ticker
 import geopandas as gpd, cartopy.crs as ccrs
 import contextily as ctx
-#import cartopy.io.img_tiles as cimgt
 
 #################Argument Declaration#################
 
@@ -199,6 +198,14 @@ for lid in recalb_lids:
     elev_ax=fig.add_subplot(gs[2:4,4:6])
     efc_ax=fig.add_subplot(gs[2:4,6:8])
     ksat_ax=fig.add_subplot(gs[2:4,8:])
+    
+    #Remove frame around boxplot 
+    ptps_ax.set_frame_on(False)
+    precip_ax.set_frame_on(False)
+    swe_ax.set_frame_on(False)
+    elev_ax.set_frame_on(False)
+    efc_ax.set_frame_on(False)
+    ksat_ax.set_frame_on(False)
     
     #Boxplot Color properties
     boxprops = dict(color="black",linewidth=1.5)
