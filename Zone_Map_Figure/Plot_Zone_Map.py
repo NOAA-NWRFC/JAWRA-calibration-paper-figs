@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 """
 
@@ -178,7 +178,7 @@ for lid in recalb_lids:
     elev_df.columns=cluster_df.zone_names.sort_values().unique()
     efc_df.columns=cluster_df.zone_names.sort_values().unique()
     ksat_df.columns=cluster_df.zone_names.sort_values().unique()
-
+    
     #Create a dummy axis to create a common y axis label
     ax_dummy = fig.add_subplot(gs[:4,4:])
     # Turn off axis lines and ticks of the big subplot
@@ -265,12 +265,12 @@ for lid in recalb_lids:
     ksat_ax.locator_params(axis="y", integer=True, tight=True)
 
     #Add titles
-    ptps_ax.set_title('PTPS',fontdict={'fontsize': 14})
-    precip_ax.set_title('Precip',fontdict={'fontsize': 14})
-    swe_ax.set_title('SWE',fontdict={'fontsize': 14})
-    elev_ax.set_title('Elev',fontdict={'fontsize': 14})
-    efc_ax.set_title('EFC',fontdict={'fontsize': 14})
-    ksat_ax.set_title('Ksat',fontdict={'fontsize': 14})
+    ptps_ax.set_title('PTPS (%)',fontdict={'fontsize': 14})
+    precip_ax.set_title('Precip (inch)',fontdict={'fontsize': 14})
+    swe_ax.set_title('SWE (inch)',fontdict={'fontsize': 14})
+    elev_ax.set_title('Elev (ft)',fontdict={'fontsize': 14})
+    efc_ax.set_title('EFC (%)',fontdict={'fontsize': 14})
+    ksat_ax.set_title('Ksat (cm/day)',fontdict={'fontsize': 14})
     
     #Set the hspace to prevent overlap
     fig.subplots_adjust(hspace = .5)
