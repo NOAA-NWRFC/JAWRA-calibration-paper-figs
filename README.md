@@ -1,8 +1,6 @@
 ## Supporting data and code for development of journal article figures
 
-Title:  **"A comprehensive calibration framework for the Northwest River Forecast Center"**
-
-Paper submitted for review to the Journal of the American Water Resources Association (JAWA) on April 2025
+Walters, G., Bracken, C., et al., "A comprehensive calibration framework for the Northwest River Forecast Center." Unpublished manuscript, Submitted 2025, JAWA Journal of the American Water Resources Association
 
 Data:  https://zenodo.org/records/14057210
 
