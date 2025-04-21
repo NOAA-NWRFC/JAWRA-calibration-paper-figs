@@ -1,6 +1,6 @@
 # Supporting data and code for development of journal article figures
 
-Walters, G., Bracken, C., et al., "A comprehensive calibration framework for the Northwest River Forecast Center." Unpublished manuscript, Submitted 2025, JAWRA Journal of the American Water Resources Association
+Walters, G., Bracken, C., et al., "A comprehensive calibration framework for the Northwest River Forecast Center." Unpublished manuscript, Submitted 2025, [Preprint](https://eartharxiv.org/repository/view/8993/)
 
 Data:  https://zenodo.org/records/14057210
 
