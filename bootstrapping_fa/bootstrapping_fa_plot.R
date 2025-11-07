@@ -1,5 +1,5 @@
 import::from(plotly, ggplotly)
-import::from(readr, read_csv)
+import::from(readr, read_csv, cols)
 
 ##############
 #Load and Format Data
