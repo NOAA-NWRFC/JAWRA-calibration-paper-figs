@@ -17,7 +17,7 @@ bs_combo = rbind(no_fa_bs,fa_bs)
 #change columns from character to factors
 #master_degrade$type = as.factor(master_degrade$type)
 bs_combo =  bs_combo |> mutate_if(is.character,as.factor)
-bs_combo$metric = factor(bs_combo$metric,levels=c('nnse','npbias','R2','nkge'))
+bs_combo$metric = factor(bs_combo$metric,levels=c('nNSE','nPBIAS','R2','nKGE'))
 
 ##############
 #Plot figure
@@ -37,7 +37,9 @@ g = ggplot() +
     #panel.border = element_rect(colour = "black", fill=NA, linewidth=1),
     axis.ticks.x.bottom=element_line(colour = "black", linewidth=.5),
         plot.title = element_text(hjust = 0.5),
-        text = element_text(size = 12),
-        legend.position = "bottom")
+        text = element_text(size = 12, color="black"),
+        legend.position = "bottom",
+        axis.text.x = element_text(color = "black", face="bold"),
+        strip.text = element_text(color = "black", face = "bold"))
 
-ggsave("bs_fa_compare.png",g,width = 9, height = 6,bg = 'white')
+ggsave("bs_fa_compare.png",g,dpi= 600,width = 9, height = 6,bg = 'white')
