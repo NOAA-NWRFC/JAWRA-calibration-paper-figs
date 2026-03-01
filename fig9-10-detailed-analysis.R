@@ -1,7 +1,9 @@
 library(tidyverse)
-import::from(hydroGOF, KGE, NSE, pbias)
-import::from(xtable, xtable)
-import::from(ggthemes, colorblind_pal)
+box::use(
+  hydroGOF[KGE, NSE, pbias],
+  xtable[xtable],
+  ggthemes[colorblind_pal],
+)
 
 options(
   readr.show_progress = FALSE,
