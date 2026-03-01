@@ -299,6 +299,44 @@
       "Maintainer": "Kirill Müller <kirill@cynkra.com>",
       "Repository": "CRAN"
     },
+    "box": {
+      "Package": "box",
+      "Version": "1.2.1",
+      "Source": "Repository",
+      "Title": "Write Reusable, Composable and Modular R Code",
+      "Authors@R": "c( person( 'Konrad', 'Rudolph', email = 'konrad.rudolph@gmail.com', role = c('aut', 'cre'), comment = c(ORCID = '0000-0002-9866-7051') ), person( 'Michael', 'Schubert', email = 'mschu.dev@gmail.com', role = 'ctb', comment = c(ORCID = '0000-0002-6862-5221') ) )",
+      "URL": "https://klmr.me/box/, https://github.com/klmr/box",
+      "BugReports": "https://github.com/klmr/box/issues",
+      "Description": "A modern module system for R. Organise code into hierarchical, composable, reusable modules, and use it effortlessly across projects via a flexible, declarative dependency loading syntax.",
+      "Depends": [
+        "R (>= 3.6.0)"
+      ],
+      "Imports": [
+        "tools"
+      ],
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "Suggests": [
+        "devtools",
+        "knitr (>= 1.40)",
+        "rmarkdown",
+        "R6",
+        "rlang",
+        "roxygen2 (>= 7.2.1)",
+        "shiny",
+        "stringr",
+        "testthat (>= 3.1.7)"
+      ],
+      "Enhances": [
+        "rstudioapi"
+      ],
+      "VignetteBuilder": "knitr",
+      "RoxygenNote": "7.3.3",
+      "NeedsCompilation": "yes",
+      "Author": "Konrad Rudolph [aut, cre] (ORCID: <https://orcid.org/0000-0002-9866-7051>), Michael Schubert [ctb] (ORCID: <https://orcid.org/0000-0002-6862-5221>)",
+      "Maintainer": "Konrad Rudolph <konrad.rudolph@gmail.com>",
+      "Repository": "CRAN"
+    },
     "broom": {
       "Package": "broom",
       "Version": "1.0.12",
@@ -1417,33 +1455,6 @@
       "NeedsCompilation": "no",
       "Author": "Rich FitzJohn [aut, cre]",
       "Maintainer": "Rich FitzJohn <rich.fitzjohn@gmail.com>",
-      "Repository": "CRAN"
-    },
-    "import": {
-      "Package": "import",
-      "Version": "1.3.4",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "An Import Mechanism for R",
-      "Authors@R": "c(person(given = \"Stefan Milton\", family = \"Bache\", role = c(\"aut\"), email = \"stefan@stefanbache.dk\"), person(given = \"Magnus Thor\", family = \"Torfason\", role = c(\"aut\", \"cre\"), email = \"m@zulutime.net\"))",
-      "Description": "Alternative mechanism for importing objects from packages and R modules. The syntax allows for importing multiple objects with a single command in an expressive way. The import package bridges some of the gap between using library (or require) and direct (single-object) imports. Furthermore the imported objects are not placed in the current environment.",
-      "License": "MIT + file LICENSE",
-      "ByteCompile": "TRUE",
-      "URL": "https://rticulate.github.io/import/, https://github.com/rticulate/import",
-      "BugReports": "https://github.com/rticulate/import/issues",
-      "Suggests": [
-        "knitr",
-        "rmarkdown",
-        "magrittr",
-        "testthat"
-      ],
-      "Language": "en-US",
-      "VignetteBuilder": "knitr",
-      "RoxygenNote": "7.3.3",
-      "Encoding": "UTF-8",
-      "NeedsCompilation": "no",
-      "Author": "Stefan Milton Bache [aut], Magnus Thor Torfason [aut, cre]",
-      "Maintainer": "Magnus Thor Torfason <m@zulutime.net>",
       "Repository": "CRAN"
     },
     "isoband": {

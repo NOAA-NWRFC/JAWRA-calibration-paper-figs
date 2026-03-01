@@ -1,0 +1,21 @@
+[workspace]
+authors = ["Cameron Bracken <32280+cameronbracken@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "nwrfc-calb-paper-figures"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+R = "R --no-save --no-restore --quiet"
+
+[dependencies]
+r-base = ">=4.5"
+r-tidyverse = "*"
+r-sf = "*"
+r-ggthemes = "*"
+r-hydrogof = "*"
+r-xtable = "*"
+r-magrittr = ">=2.0.4,<3"
+
+[environments]
+env = []

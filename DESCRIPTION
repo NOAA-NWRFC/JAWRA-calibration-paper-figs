@@ -1,0 +1,10 @@
+Type: project
+Title: NWRFC Calibration Paper Figures
+Description: Figures and analysis for the NWRFC hydrologic model calibration paper.
+Depends:
+    tidyverse,
+    sf,
+    ggthemes,
+    hydroGOF,
+    xtable,
+    box
