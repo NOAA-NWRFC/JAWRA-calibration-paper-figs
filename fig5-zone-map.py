@@ -8,7 +8,6 @@ Written by Geoffrey Walters PE, 11/15/24
 
 """
 
-
 #Debugging
 #import pdb; pdb.set_trace()
 
@@ -29,13 +28,13 @@ import contextily as ctx
 desc = "Creates Basin zone maps based on given input of nwslid and number of basins"
 parser = argparse.ArgumentParser(description=desc,formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 # Add an argument with a default value
-parser.add_argument('-z','--zones', dest="zones", default=int(2),nargs =1,type = int, help='Number of zones to plot')
-parser.add_argument('-l','--nwslid', dest="lid", default=['WGCM8'],nargs ='+', help='NWLID of basin to plot')
+#parser.add_argument('-z','--zones', dest="zones", default=int(2),nargs =1,type = int, help='Number of zones to plot')
+#parser.add_argument('-l','--nwslid', dest="lid", default=['WGCM8'],nargs ='+', help='NWLID of basin to plot')
 parser.add_argument('-a','--api', dest="api", type=str, help='stadiamaps api')
 args = parser.parse_args()
 
-Number_of_zones=args.zones
-recalb_lids=args.lid
+Number_of_zones=int(2)
+recalb_lids=['WGCM8']
 maps_api = args.api
 
 if not maps_api:
@@ -51,21 +50,21 @@ else:
 folder=os.getcwd()
 version='A'
 
-cluster_grids_1_zones=xr.open_mfdataset(os.path.join(folder,'zone-cluster-data','Basin_'+version+'_Cluster_Results-1_Zones_20240511.nc'), combine='nested', concat_dim='time', parallel=True)
-cluster_grids_2_zones=xr.open_mfdataset(os.path.join(folder,'zone-cluster-data','Basin_'+version+'_Cluster_Results-2_Zones_20240511.nc'), combine='nested', concat_dim='time', parallel=True)
-cluster_grids_3_zones=xr.open_mfdataset(os.path.join(folder,'zone-cluster-data','Basin_'+version+'_Cluster_Results-3_Zones_20240511.nc'), combine='nested', concat_dim='time', parallel=True)
+cluster_grids_1_zones=xr.open_mfdataset(os.path.join(folder,'nwrfc-calibration-paper-data','fig5-zone-map','zone-cluster-data','Basin_'+version+'_Cluster_Results-1_Zones_20240511.nc'), combine='nested', concat_dim='time', parallel=True)
+cluster_grids_2_zones=xr.open_mfdataset(os.path.join(folder,'nwrfc-calibration-paper-data','fig5-zone-map','zone-cluster-data','Basin_'+version+'_Cluster_Results-2_Zones_20240511.nc'), combine='nested', concat_dim='time', parallel=True)
+cluster_grids_3_zones=xr.open_mfdataset(os.path.join(folder,'nwrfc-calibration-paper-data','fig5-zone-map','zone-cluster-data','Basin_'+version+'_Cluster_Results-3_Zones_20240511.nc'), combine='nested', concat_dim='time', parallel=True)
 
-lid_key=pd.read_csv(os.path.join(folder,'zone-cluster-data','Basin_'+version+'_LID_Key.csv'),index_col='LID')
+lid_key=pd.read_csv(os.path.join(folder,'nwrfc-calibration-paper-data','fig5-zone-map','zone-cluster-data','Basin_'+version+'_LID_Key.csv'),index_col='LID')
 
-cluster_var_grid=xr.open_mfdataset(os.path.join(folder,'zone-cluster-data','Cluster_Grids_Merged.nc'), combine='nested', concat_dim='time', parallel=True)
+cluster_var_grid=xr.open_mfdataset(os.path.join(folder,'nwrfc-calibration-paper-data','fig5-zone-map','zone-cluster-data','Cluster_Grids_Merged.nc'), combine='nested', concat_dim='time', parallel=True)
 
-basin_sf=gpd.read_file(os.path.join(folder,'shapefile','NWRFC_Forecast_Basins_20241001.shp'))
-pt_sf=gpd.read_file(os.path.join(folder,'shapefile','NWRFC_Forecast_Points_20240512.shp'))
+basin_sf=gpd.read_file(os.path.join(folder,'nwrfc-calibration-paper-data','fig5-zone-map','shapefiles','NWRFC_Forecast_Basins_20241001.shp'))
+pt_sf=gpd.read_file(os.path.join(folder,'nwrfc-calibration-paper-data','fig5-zone-map','shapefiles','NWRFC_Forecast_Points_20240512.shp'))
 
 if version=='A':
-    sf_path = glob.glob(os.path.join(folder,'shapefile',str(Number_of_zones)+'_Zones','NWRFC_Forecast_Zones_A*.shp'))[0]
+    sf_path = glob.glob(os.path.join(folder,'nwrfc-calibration-paper-data','fig5-zone-map','shapefiles',str(Number_of_zones)+'_Zones','NWRFC_Forecast_Zones_A*.shp'))[0]
 elif version=='B':
-    sf_path = glob.glob(os.path.join(folder,'shapefile',str(Number_of_zones)+'_Zones','NWRFC_Forecast_Zones_B*.shp'))[0]
+    sf_path = glob.glob(os.path.join(folder,'nwrfc-calibration-paper-data','fig5-zone-map','shapefiles',str(Number_of_zones)+'_Zones','NWRFC_Forecast_Zones_B*.shp'))[0]
 else:
     raise Exception("Input version should be a or b")
 zone_sf=gpd.read_file(sf_path)
@@ -283,7 +282,7 @@ for lid in recalb_lids:
     fig.tight_layout
 
     #Save figure 
-    fig.savefig(os.path.join(folder,lid +'_'+str(Number_of_zones)+'-Zone_Kmean_Map.png'))
+    fig.savefig(os.path.join(folder,'fig5-zone-map.png'))
  
     plt.clf()
     plt.close('all')

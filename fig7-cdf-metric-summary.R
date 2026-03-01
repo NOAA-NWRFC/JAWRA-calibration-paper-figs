@@ -11,10 +11,9 @@ options(
   dplyr.summarise.inform = FALSE
 )
 
-# data_dir = "nwrfc-calibration-paper-data/CAMELS_all_locations/2zone"
-calb_summary_fn = "nwrfc-calibration-paper-data/AC+Legacy_Metrics.csv"
-figure_dir = "figures"
-regional_model_dir = "nwrfc-calibration-paper-data/single-basin-vs-regional-model/run_dirs/regional_model"
+calb_summary_fn = "nwrfc-calibration-paper-data/section6-calibration-results-camels-basins/nwrfc_autocalb_legacy_CAMELS_metrics.csv"
+#figure_dir = "figures"
+regional_model_dir = "nwrfc-calibration-paper-data/section6-calibration-results-camels-basins/lstm-kratzert-2024/run_dirs/regional_model"
 
 # Load AC+Legacy metrics
 calb_summary =
@@ -27,7 +26,7 @@ calb_summary =
 
 # Load USGS locations to map basin IDs
 usgs_locations =
-  read_csv("data/202005_usgs_locations.csv") |>
+  read_csv("nwrfc-calibration-paper-data/section6-calibration-results-camels-basins/202005_usgs_locations.csv") |>
   mutate(basin = as.character(gsno)) |>
   select(basin, lid)
 
@@ -146,7 +145,8 @@ p_cdf_summary =
   scale_x_continuous(limits = c(0.71, 1.0)) +
   theme(axis.text = element_text(size = 8))
 print(p_cdf_summary)
-sprintf("%s/cdf_camels_summary.pdf", figure_dir) |>
+#sprintf("%s/cdf_camels_summary.pdf", figure_dir) |>
+'fig7-cdf-metric-summary.pdf' |>
   ggsave(p_cdf_summary, width = 8, height = 4)
 
 # Summary statistics comparison

@@ -10,10 +10,10 @@ options(
   dplyr.summarise.inform = FALSE
 )
 
-data_dir <- "nwrfc-calibration-paper-data/CAMELS_all_locations/2zone"
+data_dir <- "nwrfc-calibration-paper-data/section6-calibration-results-camels-basins/nwrfc_autocalb_CAMELS_runs"
 # calb_sum
 calb_dir <- "results_por_01"
-figure_dir <- "plots"
+#figure_dir <- "plots"
 
 basins <- list.files(data_dir)
 # usgs_locations <- read_csv("data/imputation/202005_usgs_locations.csv") |>
@@ -228,6 +228,7 @@ p_budyko <- ggplot(b) +
   # coord_cartesian(xlim = c(0, 1.05 * max(b$x)))
   coord_equal(expand = F, clip = "on", xlim = c(0, 2))
 p_budyko
-sprintf("%s/budyko.pdf", figure_dir) |>
+#sprintf("%s/budyko.pdf", figure_dir) |>
+'fig8-budyko-camels.pdf' |>
   ggsave(p_budyko, width = 6, height = 3)
 # }

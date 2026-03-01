@@ -1,3 +1,5 @@
+pdf(NULL)
+
 library(tidyverse)
 import::from(hydroGOF, KGE, NSE, pbias)
 import::from(xtable, xtable)
@@ -10,26 +12,20 @@ options(
   dplyr.summarise.inform = FALSE
 )
 
-figure_dir <- "plots"
-dir.create(figure_dir, showWarnings = FALSE)
 
 basins <- c("FSSO3", "WGCM8", "SAKW1")
-zones <- c("FSSO3" = "1zone", "WGCM8" = "2zone", "SAKW1" = "2zone")
-usgs_locations <- read_csv("data/202005_usgs_locations.csv") |>
-  filter(lid %in% basins)
+#zones <- c("FSSO3" = "1zone", "WGCM8" = "2zone", "SAKW1" = "2zone")
+# usgs_locations <- read_csv("data/202005_usgs_locations.csv") |>
+#   filter(lid %in% basins)
 
 calb_types <- c("cv_1", "cv_2", "cv_3", "cv_4", "por")
-forcing_types <- c("FA", "noFA")
 calb_data_list <- list()
 i <- 0
 for (basin in basins) {
   for (calb_type in calb_types) {
-    for (forcing_type in forcing_types) {
       i <- i + 1
       basin_dir <- sprintf(
-        "nwrfc-calibration-paper-data/Optimization_CAMELS_%s/%s/%s",
-        forcing_type,
-        zones[basin],
+        "nwrfc-calibration-paper-data/section7-calibration-results-case-studies/autocalb-case-study-runs-forcing-adj/%s",
         basin
       )
       calb_dir <- list.files(basin_dir, paste0("results_", calb_type, "_*"))
@@ -40,12 +36,12 @@ for (basin in basins) {
       )) |>
         mutate(
           basin = basin,
-          forcing_type = forcing_type,
+          forcing_type = 'FA',
           calb_type = calb_type
         )
-    }
   }
 }
+
 
 calb_data <- calb_data_list |>
   bind_rows() |>
@@ -83,8 +79,7 @@ calb_data |>
   group_by(basin) |>
   group_split() |>
   map(function(x) {
-    xtable(x, digits = 3) |>
-      print()
+    xtable(x, digits = 3)
   }) -> shhh
 
 
@@ -150,8 +145,8 @@ p_cyclical <- cyclical |>
   ) +
   labs(y = "Streamflow [cfs]", x = "")
 p_cyclical
-sprintf("%s/cyclical.pdf", figure_dir) |>
-  ggsave(p_cyclical, width = 8, height = 6)
+#sprintf("%s/cyclical.pdf", figure_dir) |>
+ggsave("fig10-cyclical-sf.pdf",p_cyclical, width = 8, height = 6)
 
 p_timeseries <- calb_data_long |>
   filter(year %in% c(2019:2021), calb_type == "por") |>
@@ -166,52 +161,7 @@ p_timeseries <- calb_data_long |>
   scale_x_datetime(minor_breaks = "month") +
   theme(legend.position = "top")
 p_timeseries
-sprintf("%s/timeseries.pdf", figure_dir) |>
-  ggsave(p_timeseries, width = 8, height = 6)
+#sprintf("%s/timeseries.pdf", figure_dir) |>
+ggsave("fig9-simulation-2019-22.pdf",p_timeseries, width = 8, height = 6)
 
-
-p_peak_flow <- low_high_flow |>
-  filter(flow == "High Flow") |>
-  filter(calb_type == "por", forcing_type == "FA") |>
-  ggplot() +
-  geom_point(aes(sim, obs)) +
-  geom_label(
-    aes(x = 0, y = Inf, label = label),
-    vjust = 1.5,
-    hjust = 0,
-    data = low_high_flow_pbias |>
-      filter(calb_type == "por", forcing_type == "FA") |>
-      filter(flow == "High Flow")
-  ) +
-  facet_grid(flow ~ basin) +
-  coord_equal() +
-  geom_abline(slope = 1, intercept = 0) +
-  theme_minimal() +
-  labs(x = "Simulated flow [cfs]", y = "Observed flow [cfs]")
-p_peak_flow
-sprintf("%s/peak_flow.pdf", figure_dir) |>
-  ggsave(p_peak_flow, width = 8, height = 3)
-
-
-p_low_flow <- low_high_flow |>
-  filter(flow == "Low Flow") |>
-  filter(calb_type == "por", forcing_type == "FA") |>
-  ggplot() +
-  geom_point(aes(sim, obs)) +
-  geom_label(
-    aes(x = Inf, y = 0, label = label),
-    vjust = 0.2,
-    hjust = 1.1,
-    data = low_high_flow_pbias |>
-      filter(calb_type == "por", forcing_type == "FA") |>
-      filter(flow == "Low Flow")
-  ) +
-  facet_grid(flow ~ basin) +
-  geom_abline(slope = 1, intercept = 0) +
-  theme_minimal() +
-  labs(x = "Simulated flow [cfs]", y = "Observed flow [cfs]")
-p_low_flow
-sprintf("%s/low_flow.pdf", figure_dir) |>
-  ggsave(p_low_flow, width = 8, height = 3)
-
-# bydyko plot for camels basins
+dev.off()

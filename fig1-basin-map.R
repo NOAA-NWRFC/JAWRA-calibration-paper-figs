@@ -9,29 +9,29 @@ options(
 
 
 nwrfc_domain <- st_read(
-  "nwrfc-calibration-paper-data/NWRFC_Boundary/NWRFC_boundary.shp"
+  "nwrfc-calibration-paper-data/fig1-basin-map/NWRFC_boundary.shp"
 )
 nwrfc_camels <- st_read(
-  "nwrfc-calibration-paper-data/CAMELS_NWRFC/CAMELS_NWRFC.shp"
+  "nwrfc-calibration-paper-data/fig1-basin-map/CAMELS_NWRFC.shp"
 )
 
 calb_basins_to_plot <- st_read(
-  "nwrfc-calibration-paper-data/nwrfc_basins_sf/NWRFC_Forecast_Basins_20240113.shp"
+  "nwrfc-calibration-paper-data/fig1-basin-map/NWRFC_Forecast_Basins_20241001.shp"
 ) |>
   filter(LID %in% c("FSSO3", "WGCM8", "SAKW1"))
 
 forecast_points <- st_read(
-  "nwrfc-calibration-paper-data/NWRFC_forecast_points/NWRFC_Forecast_Points_20240512.shp"
+  "nwrfc-calibration-paper-data/fig1-basin-map/NWRFC_Forecast_Points_20240512.shp"
 )
 
 flowlines <- st_read(
-  "nwrfc-calibration-paper-data/NWRFC_flowlines/NWRFC_Flowlines.shp"
+  "nwrfc-calibration-paper-data/fig1-basin-map/NWRFC_Flowlines.shp"
 )
 big_rivers <- flowlines |>
-  filter(GNIS_Name %in% c("Columbia River", "Snake River"))
+  filter(Name %in% c("Columbia River", "Snake River"))
 
 states <- st_read(
-  "nwrfc-calibration-paper-data/cb_2018_us_state_5m/cb_2018_us_state_5m.shp"
+  "nwrfc-calibration-paper-data/fig1-basin-map/cb_2018_us_state_5m.shp"
 ) |>
   filter(
     NAME %in%
@@ -46,7 +46,7 @@ states <- st_read(
         "Utah"
       )
   )
-countries <- "nwrfc-calibration-paper-data/world-administrative-boundaries/world-administrative-boundaries.shp" |>
+countries <- "nwrfc-calibration-paper-data/fig1-basin-map/world-administrative-boundaries.shp" |>
   st_read() |>
   filter(name %in% c("Canada"))
 
@@ -56,7 +56,7 @@ map <- ggplot() +
   geom_sf(data = nwrfc_domain, fill = NA, linewidth = .8) +
   # geom_sf(data = basins, fill = NA) +
   geom_sf(data = nwrfc_camels, fill = grey(.7)) +
-  geom_sf(aes(fill = NAME), data = calb_basins_to_plot) +
+  geom_sf(aes(fill = LID), data = calb_basins_to_plot) +
   geom_sf(
     data = flowlines,
     fill = NA,
@@ -83,4 +83,4 @@ map <- ggplot() +
     panel.grid = element_blank()
   )
 map
-ggsave("basin-map-flow.png", width = 8, height = 8, dpi = 600)
+ggsave("fig1-basin-map.png", width = 8, height = 8, dpi = 600)
