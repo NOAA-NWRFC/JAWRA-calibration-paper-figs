@@ -35,10 +35,10 @@ args = parser.parse_args()
 
 Number_of_zones=int(2)
 recalb_lids=['WGCM8']
-maps_api = args.api
+maps_api = args.api if args.api else os.getenv("STADIA_MAPS_API_KEY")
 
 if not maps_api:
-    raise Exception("Must include StadiaMaps API as argument [-a, --api]")
+    raise Exception("Must include StadiaMaps API via argument [-a, --api] or STADIA_MAPS_API_KEY environment variable")
 else:
     #configure api
     provider = ctx.providers.Stadia.StamenTerrainBackground (api_key=maps_api)
