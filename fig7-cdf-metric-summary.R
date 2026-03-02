@@ -1,3 +1,5 @@
+pdf(NULL)
+
 library(tidyverse)
 library(ggthemes)
 library(hydroGOF)

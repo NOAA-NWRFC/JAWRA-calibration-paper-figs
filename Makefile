@@ -18,7 +18,7 @@ check-env:
 	@test "$(STADIA_MAPS_API_KEY)" != "your_key_here" || (echo "Error: STADIA_MAPS_API_KEY is still set to placeholder value"; exit 1)
 	@test -n "$(zenodo_id)" || (echo "Error: zenodo_id is empty in .env"; exit 1)
 
-$(SETUP_STAMP): check-env $(ENV_YML)
+$(SETUP_STAMP): $(ENV_YML) | check-env
 	@echo "Checking Stadia Maps API key..."
 	@curl --silent --fail \
 		"https://tiles.stadiamaps.com/tiles/alidade_smooth/1/1/1.png?api_key=$(STADIA_MAPS_API_KEY)" \
@@ -42,6 +42,7 @@ $(SETUP_STAMP): check-env $(ENV_YML)
 	@test -f "$(DATA_ZIP)" || (echo "Error: Expected $(DATA_ZIP) after download"; exit 1)
 	@rm -rf data/.tmp_unzip
 	@mkdir -p data/.tmp_unzip
+	@echo "Unzipping Zenodo Record..."
 	@unzip -q -o "$(DATA_ZIP)" -d data/.tmp_unzip
 	@test -d data/.tmp_unzip/nwrfc-calibration-paper-data || (echo "Error: Unexpected zip structure"; exit 1)
 	@cp -R data/.tmp_unzip/nwrfc-calibration-paper-data/. data/
