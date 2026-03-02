@@ -1,8 +1,11 @@
 library(tidyverse)
 library(ggthemes)
-import::from(hydroGOF, KGE, NSE, pbias)
-import::from(xtable, xtable, print.xtable)
-import::from(ggthemes, colorblind_pal)
+library(hydroGOF)
+library(xtable)
+library(ggthemes)
+#import::from(hydroGOF, KGE, NSE, pbias)
+#import::from(xtable, xtable, print.xtable)
+#import::from(ggthemes, colorblind_pal)
 
 options(
   readr.show_progress = FALSE,
@@ -11,9 +14,9 @@ options(
   dplyr.summarise.inform = FALSE
 )
 
-calb_summary_fn = "nwrfc-calibration-paper-data/section6-calibration-results-camels-basins/nwrfc_autocalb_legacy_CAMELS_metrics.csv"
-#figure_dir = "figures"
-regional_model_dir = "nwrfc-calibration-paper-data/section6-calibration-results-camels-basins/lstm-kratzert-2024/run_dirs/regional_model"
+if (!dir.exists('figures')) dir.create('figures')
+calb_summary_fn = "data/section6-calibration-results-camels-basins/nwrfc_autocalb_legacy_CAMELS_metrics.csv"
+regional_model_dir = "data/section6-calibration-results-camels-basins/lstm-kratzert-2024/run_dirs/regional_model"
 
 # Load AC+Legacy metrics
 calb_summary =
@@ -26,7 +29,7 @@ calb_summary =
 
 # Load USGS locations to map basin IDs
 usgs_locations =
-  read_csv("nwrfc-calibration-paper-data/section6-calibration-results-camels-basins/202005_usgs_locations.csv") |>
+  read_csv("data/section6-calibration-results-camels-basins/202005_usgs_locations.csv") |>
   mutate(basin = as.character(gsno)) |>
   select(basin, lid)
 
@@ -145,9 +148,7 @@ p_cdf_summary =
   scale_x_continuous(limits = c(0.71, 1.0)) +
   theme(axis.text = element_text(size = 8))
 print(p_cdf_summary)
-#sprintf("%s/cdf_camels_summary.pdf", figure_dir) |>
-'fig7-cdf-metric-summary.pdf' |>
-  ggsave(p_cdf_summary, width = 8, height = 4)
+ggsave('figures/fig7-cdf-metric-summary.pdf',p_cdf_summary, width = 8, height = 4)
 
 # Summary statistics comparison
 summary_stats =

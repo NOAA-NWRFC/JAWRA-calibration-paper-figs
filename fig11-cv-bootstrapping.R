@@ -1,13 +1,16 @@
 #import::from(plotly, ggplotly)
 library(ggplot2)
-import::from(readr, read_csv, cols)
-import::from(dplyr,mutate_if,filter)
+library(readr)
+library(dplyr)
+# import::from(readr, read_csv, cols)
+# import::from(dplyr,mutate_if,filter)
 ##############
 #Load and Format Data
 ###############
+if (!dir.exists('figures')) dir.create('figures')
 
-no_fa_bs_path = "nwrfc-calibration-paper-data/section7-calibration-results-case-studies/cv+por-bs-no-forcing-adj.csv"
-fa_bs_path = "nwrfc-calibration-paper-data/section7-calibration-results-case-studies/cv+por-bs_forcing_adj.csv"
+no_fa_bs_path = "data/section7-calibration-results-case-studies/cv+por-bs-no-forcing-adj.csv"
+fa_bs_path = "data/section7-calibration-results-case-studies/cv+por-bs_forcing_adj.csv"
 
 no_fa_bs = read_csv(no_fa_bs_path, col_types = cols())
 fa_bs = read_csv(fa_bs_path, col_types = cols())
@@ -42,4 +45,4 @@ g = ggplot() +
         axis.text.x = element_text(color = "black", face="bold"),
         strip.text = element_text(color = "black", face = "bold"))
 
-ggsave("fig11-cv-bootstrapping.png",g,dpi= 600,width = 9, height = 6,bg = 'white')
+ggsave("figures/fig11-cv-bootstrapping.png",g,dpi= 600,width = 9, height = 6,bg = 'white')

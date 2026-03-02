@@ -9,29 +9,29 @@ options(
 
 
 nwrfc_domain <- st_read(
-  "nwrfc-calibration-paper-data/fig1-basin-map/NWRFC_boundary.shp"
+  "data/fig1-basin-map/NWRFC_boundary.shp"
 )
 nwrfc_camels <- st_read(
-  "nwrfc-calibration-paper-data/fig1-basin-map/CAMELS_NWRFC.shp"
+  "data/fig1-basin-map/CAMELS_NWRFC.shp"
 )
 
 calb_basins_to_plot <- st_read(
-  "nwrfc-calibration-paper-data/fig1-basin-map/NWRFC_Forecast_Basins_20241001.shp"
+  "data/fig1-basin-map/NWRFC_Forecast_Basins_20241001.shp"
 ) |>
   filter(LID %in% c("FSSO3", "WGCM8", "SAKW1"))
 
 forecast_points <- st_read(
-  "nwrfc-calibration-paper-data/fig1-basin-map/NWRFC_Forecast_Points_20240512.shp"
+  "data/fig1-basin-map/NWRFC_Forecast_Points_20240512.shp"
 )
 
 flowlines <- st_read(
-  "nwrfc-calibration-paper-data/fig1-basin-map/NWRFC_Flowlines.shp"
+  "data/fig1-basin-map/NWRFC_Flowlines.shp"
 )
 big_rivers <- flowlines |>
   filter(Name %in% c("Columbia River", "Snake River"))
 
 states <- st_read(
-  "nwrfc-calibration-paper-data/fig1-basin-map/cb_2018_us_state_5m.shp"
+  "data/fig1-basin-map/cb_2018_us_state_5m.shp"
 ) |>
   filter(
     NAME %in%
@@ -46,7 +46,7 @@ states <- st_read(
         "Utah"
       )
   )
-countries <- "nwrfc-calibration-paper-data/fig1-basin-map/world-administrative-boundaries.shp" |>
+countries <- "data/fig1-basin-map/world-administrative-boundaries.shp" |>
   st_read() |>
   filter(name %in% c("Canada"))
 
@@ -83,4 +83,5 @@ map <- ggplot() +
     panel.grid = element_blank()
   )
 map
-ggsave("fig1-basin-map.png", width = 8, height = 8, dpi = 600)
+if (!dir.exists('figures')) dir.create('figures')
+ggsave("figures/fig1-basin-map.png", width = 8, height = 8, dpi = 600)

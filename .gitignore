@@ -1,1 +1,7 @@
 .*
+#Environment File
+!.env.example
+#Makefile setup directories
+figures/*
+data/*
+mamba_env/*

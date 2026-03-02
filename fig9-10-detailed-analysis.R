@@ -1,9 +1,12 @@
 pdf(NULL)
 
 library(tidyverse)
-import::from(hydroGOF, KGE, NSE, pbias)
-import::from(xtable, xtable)
-import::from(ggthemes, colorblind_pal)
+library(hydroGOF)
+library(xtable)
+library(ggthemes)
+# import::from(hydroGOF, KGE, NSE, pbias)
+# import::from(xtable, xtable)
+# import::from(ggthemes, colorblind_pal)
 
 options(
   readr.show_progress = FALSE,
@@ -12,6 +15,7 @@ options(
   dplyr.summarise.inform = FALSE
 )
 
+if (!dir.exists('figures')) dir.create('figures')
 
 basins <- c("FSSO3", "WGCM8", "SAKW1")
 #zones <- c("FSSO3" = "1zone", "WGCM8" = "2zone", "SAKW1" = "2zone")
@@ -25,7 +29,7 @@ for (basin in basins) {
   for (calb_type in calb_types) {
       i <- i + 1
       basin_dir <- sprintf(
-        "nwrfc-calibration-paper-data/section7-calibration-results-case-studies/autocalb-case-study-runs-forcing-adj/%s",
+        "data/section7-calibration-results-case-studies/autocalb-case-study-runs-forcing-adj/%s",
         basin
       )
       calb_dir <- list.files(basin_dir, paste0("results_", calb_type, "_*"))
@@ -146,7 +150,7 @@ p_cyclical <- cyclical |>
   labs(y = "Streamflow [cfs]", x = "")
 p_cyclical
 #sprintf("%s/cyclical.pdf", figure_dir) |>
-ggsave("fig10-cyclical-sf.pdf",p_cyclical, width = 8, height = 6)
+ggsave("figures/fig10-cyclical-sf.pdf",p_cyclical, width = 8, height = 6)
 
 p_timeseries <- calb_data_long |>
   filter(year %in% c(2019:2021), calb_type == "por") |>
@@ -162,6 +166,6 @@ p_timeseries <- calb_data_long |>
   theme(legend.position = "top")
 p_timeseries
 #sprintf("%s/timeseries.pdf", figure_dir) |>
-ggsave("fig9-simulation-2019-22.pdf",p_timeseries, width = 8, height = 6)
+ggsave("figures/fig9-simulation-2019-22.pdf",p_timeseries, width = 8, height = 6)
 
 dev.off()

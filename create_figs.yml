@@ -1,0 +1,31 @@
+name: create_figs
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  #Python Library
+  - python=3.11
+  - numpy
+  - pandas
+  - matplotlib
+  - dask
+  - packaging
+  - netcdf4
+  - xarray
+  - contextily
+  - geopandas
+  - cartopy
+  - rioxarray
+  - zenodo_get
+  
+  # R Library
+  - r-base=4.4
+  - r-tidyverse
+  - r-ggthemes
+  - r-xtable
+  - r-hydrogof
+  # Common system requirements for R packages:
+  - libxml2
+  - openssl
+  - gdal
+  - proj

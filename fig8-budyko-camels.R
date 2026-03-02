@@ -1,7 +1,12 @@
+pdf(NULL)
+
 library(tidyverse)
-import::from(hydroGOF, KGE, NSE, pbias)
-import::from(xtable, xtable, print.xtable)
-import::from(ggthemes, colorblind_pal, scale_color_colorblind)
+library(hydroGOF)
+library(xtable)
+library(ggthemes)
+#import::from(hydroGOF, KGE, NSE, pbias)
+#import::from(xtable, xtable, print.xtable)
+#import::from(ggthemes, colorblind_pal, scale_color_colorblind)
 
 options(
   readr.show_progress = FALSE,
@@ -10,10 +15,10 @@ options(
   dplyr.summarise.inform = FALSE
 )
 
-data_dir <- "nwrfc-calibration-paper-data/section6-calibration-results-camels-basins/nwrfc_autocalb_CAMELS_runs"
+data_dir <- "data/section6-calibration-results-camels-basins/nwrfc_autocalb_CAMELS_runs"
 # calb_sum
 calb_dir <- "results_por_01"
-#figure_dir <- "plots"
+if (!dir.exists('figures')) dir.create('figures')
 
 basins <- list.files(data_dir)
 # usgs_locations <- read_csv("data/imputation/202005_usgs_locations.csv") |>
@@ -229,6 +234,5 @@ p_budyko <- ggplot(b) +
   coord_equal(expand = F, clip = "on", xlim = c(0, 2))
 p_budyko
 #sprintf("%s/budyko.pdf", figure_dir) |>
-'fig8-budyko-camels.pdf' |>
-  ggsave(p_budyko, width = 6, height = 3)
+ggsave('figures/fig8-budyko-camels.pdf',p_budyko, width = 6, height = 3)
 # }
