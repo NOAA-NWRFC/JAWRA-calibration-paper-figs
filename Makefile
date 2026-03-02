@@ -24,10 +24,10 @@ setup:
 	mamba env create -p mamba_env/create_figs -f create_figs.yml
 	
 	@echo "Pulling Zenodo Record..."
-	#mamba run -p mamba_env/create_figs zenodo_get $(zenodo_id) -o ./data
-	#@unzip -q data/nwrfc-calibration-paper-data.zip
-	#@mv nwrfc-calibration-paper-data/* data
-	#@rm -r nwrfc-calibration-paper-data
+	mamba run -p mamba_env/create_figs zenodo_get $(zenodo_id) -o ./data
+	@unzip -q data/nwrfc-calibration-paper-data.zip
+	@mv nwrfc-calibration-paper-data/* data
+	@rm -r nwrfc-calibration-paper-data
 
 figures:
 	@echo "Creating fig1-basin-map..."
@@ -57,4 +57,4 @@ figures:
 
 clean:
 	mamba remove -p mamba_env/create_figs --all
-	@rm -r mamba_env figures #data
+	@rm -r mamba_env figures data

@@ -2,7 +2,7 @@
 
 Walters, G., Bracken, C., et al., "A comprehensive calibration framework for the Northwest River Forecast Center." Journal of the American Water Resources Association (JAWRA), accepted for publication in 2026. [Preprint](https://eartharxiv.org/repository/view/8993/)
 
-**Data:**  [zenodo](https://zenodo.org/records/18822134)
+**Data:**  [zenodo](https://zenodo.org/records/18831406)
 
 ## Legal disclaimer
 
