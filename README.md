@@ -4,7 +4,7 @@ Supporting data and code for reproducing figures in:
 
 Walters, G., Bracken, C., et al., "A comprehensive calibration framework for the Northwest River Forecast Center." Journal of the American Water Resources Association (JAWRA), accepted for publication in 2026. [Preprint](https://eartharxiv.org/repository/view/8993/)
 
-Data source: [Zenodo record 18831406](https://zenodo.org/records/18831406)
+Get the data for the figures: [[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18845515.svg)](https://doi.org/10.5281/zenodo.18845515)
 
 ## Quick start
 
