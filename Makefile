@@ -80,4 +80,4 @@ figures: $(SETUP_STAMP)
 
 clean:
 	@if [ -d "$(ENV_PREFIX)" ]; then mamba remove -p "$(ENV_PREFIX)" --all; fi
-	@rm -rf mamba_env figures data "$(SETUP_STAMP)"
+	@rm -rf mamba_env data "$(SETUP_STAMP)"
