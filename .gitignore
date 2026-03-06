@@ -5,3 +5,7 @@
 figures/*
 data/*
 mamba_env/*
+#Static figures
+!figures/fig2-nwsrfs-model-diagram.drawio*
+!figures/fig4-nwrfc-autocalb-diagram.drawio*
+!figures/fig6-climo-forcing-adj-ex.pdf
