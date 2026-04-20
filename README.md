@@ -2,7 +2,7 @@
 
 Supporting data and code for reproducing figures in:
 
-Walters, G., Bracken, C., et al., "A comprehensive calibration framework for the Northwest River Forecast Center." Journal of the American Water Resources Association (JAWRA), accepted for publication in 2026. [Preprint](https://eartharxiv.org/repository/view/8993/)
+Walters, G., C. Bracken, B. Gillies, et al. 2026. “A Comprehensive Calibration Framework for the Northwest River Forecast Center.” *JAWRA Journal of the American Water Resources Association* 62, no. 2: e70112. [https://doi.org/10.1111/1752-1688.70112](https://doi.org/10.1111/1752-1688.70112)
 
 Get the data for the figures: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18845515.svg)](https://doi.org/10.5281/zenodo.18845515)
 
